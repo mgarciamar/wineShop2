@@ -69,7 +69,6 @@ public class Wine {
         this.id = id;
     }
 
-
     public void setWine(String wine) {
         this.wine = wine;
     }

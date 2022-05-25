@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +23,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class WineController {
 
     private final WineRepository repository;
+    private final WineModelAssembler assembler;
 
-    WineController(WineRepository repository){
+    WineController(WineRepository repository, WineModelAssembler assembler){
         this.repository = repository;
+        this.assembler = assembler;
     }
 
     @GetMapping("/wine")
@@ -39,9 +43,18 @@ public class WineController {
     }
 
     @PostMapping("/wine")
-    Wine newWine(@RequestBody Wine newWine){
-        return repository.save(newWine);
+    ResponseEntity<?> newWine(@RequestBody Wine newWine) {
+
+        EntityModel<Wine> entityModel = assembler.toModel(repository.save(newWine));
+
+        return ResponseEntity //
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+                .body(entityModel);
     }
+
+
+
+
 
     @GetMapping("/wine/{id}")
     EntityModel<Wine> one(@PathVariable Long id){
@@ -68,9 +81,6 @@ public class WineController {
                     wine.setNum_reviews(newWine.getNum_reviews());
                     wine.setYear(newWine.getYear());
                     wine.setPrice(newWine.getPrice());
-                    wine.setRegion(newWine.getRegion());
-                    wine.setType(newWine.getType());
-                    wine.setWinery(newWine.getWinery());
                     return repository.save(wine);
                 })//
                 .orElseGet(() -> {
