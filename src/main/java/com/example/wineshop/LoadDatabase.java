@@ -13,12 +13,14 @@ public class LoadDatabase  {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(WineRepository repository) {
+    CommandLineRunner initDatabase(RegionRepository regionRepository) {
 
         return args -> {
+            regionRepository.save(new Region(null,"Chicago", "Chicago"));
+
+            regionRepository.findAll().forEach((region -> log.info(("Preloaded" + region))));
 
         };
     }
-
 }
 */
