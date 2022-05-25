@@ -10,14 +10,11 @@ import java.util.Objects;
 public class Wine {
 
     private @Id @GeneratedValue Long id;
-    private String winery;
     private String wine;
     private String year;
     private int num_reviews;
     private String country;
-    private String region;
     private double price;
-    private String type;
     private String body;
     private String acidity;
 
@@ -109,26 +106,23 @@ public class Wine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wine wine1 = (Wine) o;
-        return num_reviews == wine1.num_reviews && Double.compare(wine1.price, price) == 0 && Objects.equals(id, wine1.id) && Objects.equals(winery, wine1.winery) && Objects.equals(wine, wine1.wine) && Objects.equals(year, wine1.year) && Objects.equals(country, wine1.country) && Objects.equals(region, wine1.region) && Objects.equals(type, wine1.type) && Objects.equals(body, wine1.body) && Objects.equals(acidity, wine1.acidity);
+        return num_reviews == wine1.num_reviews && Double.compare(wine1.price, price) == 0 && Objects.equals(id, wine1.id) && Objects.equals(wine, wine1.wine) && Objects.equals(year, wine1.year) && Objects.equals(country, wine1.country) && Objects.equals(body, wine1.body) && Objects.equals(acidity, wine1.acidity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, winery, wine, year, num_reviews, country, region, price, type, body, acidity);
+        return Objects.hash(id, wine, year, num_reviews, country, price, body, acidity);
     }
 
     @Override
     public String toString() {
         return "Wine{" +
                 "id=" + id +
-                ", winery='" + winery + '\'' +
-                ", wine='" + wine + '\'' +
+                 ", wine='" + wine + '\'' +
                 ", year='" + year + '\'' +
                 ", num_reviews=" + num_reviews +
                 ", country='" + country + '\'' +
-                ", region='" + region + '\'' +
                 ", price=" + price +
-                ", type='" + type + '\'' +
                 ", body='" + body + '\'' +
                 ", acidity='" + acidity + '\'' +
                 '}';
