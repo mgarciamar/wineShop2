@@ -23,16 +23,13 @@ public class Wine {
 
     Wine(){}
 
-    public Wine(Long id, String winery, String wine, String year, int num_reviews, String country, String region, double price, String type, String body, String acidity) {
+    public Wine(Long id, String wine, String year, int num_reviews, String country, double price, String body, String acidity) {
         this.id = id;
-        this.winery = winery;
         this.wine = wine;
         this.year = year;
         this.num_reviews = num_reviews;
         this.country = country;
-        this.region = region;
         this.price = price;
-        this.type = type;
         this.body = body;
         this.acidity = acidity;
     }
@@ -42,9 +39,6 @@ public class Wine {
         return id;
     }
 
-    public String getWinery() {
-        return winery;
-    }
 
     public String getWine() {
         return wine;
@@ -62,16 +56,8 @@ public class Wine {
         return country;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getBody() {
@@ -86,9 +72,6 @@ public class Wine {
         this.id = id;
     }
 
-    public void setWinery(String winery) {
-        this.winery = winery;
-    }
 
     public void setWine(String wine) {
         this.wine = wine;
@@ -106,17 +89,11 @@ public class Wine {
         this.country = country;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public void setBody(String body) {
         this.body = body;
