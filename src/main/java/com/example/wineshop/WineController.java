@@ -76,6 +76,9 @@ public class WineController {
                     wine.setNum_reviews(newWine.getNum_reviews());
                     wine.setYear(newWine.getYear());
                     wine.setPrice(newWine.getPrice());
+                    wine.setWinery(newWine.getWinery());
+                    wine.setType(newWine.getType());
+                    wine.setRegion(newWine.getRegion());
                     return repository.save(wine);
                 })//
                 .orElseGet(() -> {
