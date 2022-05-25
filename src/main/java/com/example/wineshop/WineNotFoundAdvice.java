@@ -12,7 +12,7 @@ public class WineNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(WineNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(WineNotFoundException ex) {
+    String WineNotFoundHandler(WineNotFoundException ex) {
         return ex.getMessage();
     }
 }

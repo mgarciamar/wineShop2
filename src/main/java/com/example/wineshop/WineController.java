@@ -25,7 +25,7 @@ public class WineController {
     private final WineRepository repository;
     private final WineModelAssembler assembler;
 
-    WineController(WineRepository repository, WineModelAssembler assembler){
+    WineController(WineRepository repository, WineModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
@@ -33,7 +33,7 @@ public class WineController {
     @GetMapping("/wine")
     CollectionModel<EntityModel<Wine>> all() {
 
-        List<EntityModel<Wine>> wines= repository.findAll().stream()
+        List<EntityModel<Wine>> wines = repository.findAll().stream()
                 .map(wine -> EntityModel.of(wine,
                         linkTo(methodOn(WineController.class).one(wine.getId())).withSelfRel(),
                         linkTo(methodOn(WineController.class).all()).withRel("wine")))
@@ -53,26 +53,21 @@ public class WineController {
     }
 
 
-
-
-
     @GetMapping("/wine/{id}")
-    EntityModel<Wine> one(@PathVariable Long id){
+    EntityModel<Wine> one(@PathVariable Long id) {
 
-            Wine wine = repository.findById(id)
-                    .orElseThrow(() -> new WineNotFoundException(id));
+        Wine wine = repository.findById(id)
+                .orElseThrow(() -> new WineNotFoundException(id));
 
-            return EntityModel.of(wine, //
-                    linkTo(methodOn(WineController.class).one(id)).withSelfRel(),
-                    linkTo(methodOn(WineController.class).all()).withRel("wine"));
-        }
-
+        return EntityModel.of(wine, //
+                linkTo(methodOn(WineController.class).one(id)).withSelfRel(),
+                linkTo(methodOn(WineController.class).all()).withRel("wine"));
+    }
 
 
     @PutMapping("/wine/{id}")
-    Wine replaceWine(@RequestBody Wine newWine, @PathVariable Long id) {
-
-        return repository.findById(id)
+    ResponseEntity<?> replaceWine(@RequestBody Wine newWine, @PathVariable Long id){
+        Wine updatedWine = repository.findById(id) //
                 .map(wine -> {
                     wine.setWine(newWine.getWine());
                     wine.setAcidity(newWine.getAcidity());
@@ -87,11 +82,18 @@ public class WineController {
                     newWine.setId(id);
                     return repository.save(newWine);
                 });
+        EntityModel<Wine> entityModel = assembler.toModel(updatedWine);
+
+        return ResponseEntity //
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+                .body(entityModel);
     }
 
+
     @DeleteMapping("/wine/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    ResponseEntity<?> deleteWine(@PathVariable Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
