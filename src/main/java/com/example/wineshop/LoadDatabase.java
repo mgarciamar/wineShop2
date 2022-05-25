@@ -1,4 +1,4 @@
-/*package com.example.wineshop;
+package com.example.wineshop;
 
 
 import org.slf4j.Logger;
@@ -13,12 +13,12 @@ public class LoadDatabase  {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(WineRepository repository) {
+    CommandLineRunner initDatabase(WineRepository repository, WineryRepository wineryRepository, TypeRepository typeRepository) {
 
         return args -> {
-
+            log.info("Preloading Winery" + wineryRepository.save(new Winery(1L,"Vega Sicilia Test")));
+            log.info("Preloading Type" + typeRepository.save(new Type(1L,"Tempranillo Test")));
         };
     }
 
 }
-*/
