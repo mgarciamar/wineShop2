@@ -99,8 +99,6 @@ class WineControllerTest {
         wine.setBody("1");
         wine.setAcidity("6");
 
-
-
         webTestClient.put()
                 .uri("/wine/{id}", 2)
                 .bodyValue(wine)
