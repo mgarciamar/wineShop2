@@ -114,7 +114,6 @@ class WineControllerTest {
                 .jsonPath("$.year").isEqualTo("2050");
 
     }
-
 }
 /*
         this.id = id;
