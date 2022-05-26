@@ -70,6 +70,7 @@ public class WineController {
         Wine updatedWine = repository.findById(id) //
                 .map(wine -> {
                     wine.setRating(newWine.getRating());
+                    wine.setName(newWine.getName());
                     wine.setAcidity(newWine.getAcidity());
                     wine.setBody(newWine.getBody());
                     wine.setRating(newWine.getRating());
