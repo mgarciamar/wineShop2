@@ -53,7 +53,7 @@ class WineryControllerTest {
 
 
     @Test
-    void wineDoesntExist() {
+    void wineryDoesntExist() {
         webTestClient.get()
 
                 .uri("/winery/{id}", 600)
@@ -66,7 +66,7 @@ class WineryControllerTest {
 
 
     @Test
-    void updateWine() {
+    void updateWinery() {
 
         Winery winery = new Winery();
         winery.setName("Bodega Test");
@@ -98,19 +98,19 @@ class WineryControllerTest {
 
 
     @Test
-    void deleteWine() {
+    void deleteWinery() {
         webTestClient.delete()
 
-                .uri("/wine/{id}", 7502)
+                .uri("/winery/{id}", 15)
                 .exchange()//recupera la respuesta
                 .expectStatus().is2xxSuccessful();
     }
 
     @Test
-    void deleteWineDoesntExists() {
+    void deleteWineryDoesntExists() {
         webTestClient.delete()
 
-                .uri("/wine/{id}", 7501)
+                .uri("/winery/{id}", 600)
                 .exchange()//recupera la respuesta
                 .expectStatus().is5xxServerError();//Internal server error
 
