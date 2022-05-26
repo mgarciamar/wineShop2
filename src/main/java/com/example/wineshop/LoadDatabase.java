@@ -1,4 +1,4 @@
-package com.example.wineshop;
+/*package com.example.wineshop;
 
 
 import org.slf4j.Logger;
@@ -22,3 +22,4 @@ public class LoadDatabase  {
     }
 
 }
+*/

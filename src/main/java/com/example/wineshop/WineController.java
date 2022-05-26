@@ -69,10 +69,10 @@ public class WineController {
     ResponseEntity<?> replaceWine(@RequestBody Wine newWine, @PathVariable Long id){
         Wine updatedWine = repository.findById(id) //
                 .map(wine -> {
-                    wine.setWine(newWine.getWine());
+                    wine.setRating(newWine.getRating());
                     wine.setAcidity(newWine.getAcidity());
                     wine.setBody(newWine.getBody());
-                    wine.setCountry(newWine.getCountry());
+                    wine.setRating(newWine.getRating());
                     wine.setNum_reviews(newWine.getNum_reviews());
                     wine.setYear(newWine.getYear());
                     wine.setPrice(newWine.getPrice());

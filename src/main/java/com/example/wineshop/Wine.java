@@ -11,10 +11,12 @@ public class Wine {
 
     private @Id @GeneratedValue Long id;
     private int winery_id;
-    private String wine;
+
+    private String name;
     private String year;
     private int num_reviews;
-    private String country;
+
+    private float rating;
 
     private int region_id;
     private double price;
@@ -25,20 +27,19 @@ public class Wine {
 
     Wine(){}
 
-    public Wine(Long id, int winery_id, String wine, String year, int num_reviews, String country, int region_id, double price, int type_id, String body, String acidity) {
+    public Wine(Long id, int winery_id, String name, String year, int num_reviews, float rating, int region_id, double price, int type_id, String body, String acidity) {
         this.id = id;
         this.winery_id = winery_id;
-        this.wine = wine;
+        this.name = name;
         this.year = year;
         this.num_reviews = num_reviews;
-        this.country = country;
+        this.rating = rating;
         this.region_id = region_id;
         this.price = price;
         this.type_id = type_id;
         this.body = body;
         this.acidity = acidity;
     }
-
 
     public Long getId() {
         return id;
@@ -56,12 +57,12 @@ public class Wine {
         this.winery_id = winery_id;
     }
 
-    public String getWine() {
-        return wine;
+    public String getName() {
+        return name;
     }
 
-    public void setWine(String wine) {
-        this.wine = wine;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getYear() {
@@ -80,12 +81,12 @@ public class Wine {
         this.num_reviews = num_reviews;
     }
 
-    public String getCountry() {
-        return country;
+    public float getRating() {
+        return rating;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public int getRegion_id() {
@@ -134,12 +135,12 @@ public class Wine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wine wine1 = (Wine) o;
-        return num_reviews == wine1.num_reviews && Double.compare(wine1.price, price) == 0 && Objects.equals(id, wine1.id) && Objects.equals(winery_id, wine1.winery_id) && Objects.equals(wine, wine1.wine) && Objects.equals(year, wine1.year) && Objects.equals(country, wine1.country) && Objects.equals(region_id, wine1.region_id) && Objects.equals(type_id, wine1.type_id) && Objects.equals(body, wine1.body) && Objects.equals(acidity, wine1.acidity);
+        return num_reviews == wine1.num_reviews && Double.compare(wine1.price, price) == 0 && Objects.equals(id, wine1.id) && Objects.equals(winery_id, wine1.winery_id) && Objects.equals(name, wine1.name) && Objects.equals(year, wine1.year) && Objects.equals(rating, wine1.rating) && Objects.equals(region_id, wine1.region_id) && Objects.equals(type_id, wine1.type_id) && Objects.equals(body, wine1.body) && Objects.equals(acidity, wine1.acidity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, winery_id, wine, year, num_reviews, country, region_id, price, type_id, body, acidity);
+        return Objects.hash(id, winery_id, name, year, num_reviews, rating, region_id, price, type_id, body, acidity);
     }
 
     @Override
@@ -147,10 +148,10 @@ public class Wine {
         return "Wine{" +
                 "id=" + id +
                 ", winery='" + winery_id + '\'' +
-                ", wine='" + wine + '\'' +
+                ", wine='" + name + '\'' +
                 ", year='" + year + '\'' +
                 ", num_reviews=" + num_reviews +
-                ", country='" + country + '\'' +
+                ", country='" + rating + '\'' +
                 ", region='" + region_id + '\'' +
                 ", price=" + price +
                 ", type='" + type_id + '\'' +
