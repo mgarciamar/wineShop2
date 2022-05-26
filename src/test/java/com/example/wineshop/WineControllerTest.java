@@ -95,24 +95,27 @@ class WineControllerTest {
                 .toString().contains("Could not find wine");
     }
 
-}
 
-
-/*
     @Test
-    void updateEmployee() {
-
+    void updateWine() {
 
         Wine wine = new Wine();
-        wine.("Monica");
-        employee.setLastName("Garcia");
+        wine.setName("Monica");
+        wine.setYear("2050");
+        wine.setRating(5.3f);
 
         webTestClient.put()
-                .uri("/employees/{id}", 6)
-
-                .jsonPath("$.lastName").isEqualTo("Sanchez");
+                .uri("/wine/{id}", 1)
+                .bodyValue(wine)
+                .exchange()//recupera la respuesta
+                .expectStatus().is2xxSuccessful()
+                .expectBody()
+                //.jsonPath("$.name").isEqualTo("Monica")
+                .jsonPath("$.year").isEqualTo("2050");
 
     }
+
+}
 /*
         this.id = id;
         this.winery_id = winery_id;
