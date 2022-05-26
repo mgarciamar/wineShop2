@@ -75,7 +75,7 @@ public class TypeControllerTest {
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
-                .jsonPath("$._embedded.typeList[0].name").isEqualTo("nuevoTipo");
+                .jsonPath("$.name").isEqualTo("nuevoTipo");
     }
 
     @Test
