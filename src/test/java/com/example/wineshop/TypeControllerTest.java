@@ -78,6 +78,24 @@ public class TypeControllerTest {
                 .jsonPath("$._embedded.typeList[0].name").isEqualTo("nuevoTipo");
     }
 
+    @Test
+    void deleteType() {
+        webTestClient.delete()
+                .uri("/type/{id}", 42)
+                .exchange()
+                .expectStatus().is2xxSuccessful();
+    }
+
+
+    @Test
+    void deleteTypeDoesntExists(){
+        webTestClient.delete()
+
+                .uri("/type/{id}", 9000)
+                .exchange()
+                .expectStatus().is5xxServerError();
+    }
+
 
 
 
