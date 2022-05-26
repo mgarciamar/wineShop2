@@ -1,17 +1,18 @@
 package com.example.wineshop;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Type")
 public class Type {
 
-    private @Id
-    @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull
+    private  Long id;
     private String name;
 
     public Type(Long id, String name) {
