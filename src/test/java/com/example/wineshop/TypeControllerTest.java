@@ -75,7 +75,7 @@ public class TypeControllerTest {
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
-                .jsonPath("$.name").isEqualTo("nuevoTipo");
+                .jsonPath("$.name").isEqualTo("NuevoTipo");
     }
 
     @Test

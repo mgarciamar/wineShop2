@@ -8,6 +8,9 @@ class WineShopApplicationTests {
 
     @Test
     void contextLoads() {
+
+    //    TypeControllerTest typeControllerTest1 = new TypeControllerTest();
+
     }
 
 }
