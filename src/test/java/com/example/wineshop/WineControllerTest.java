@@ -35,12 +35,12 @@ class WineControllerTest {
     @AfterEach
     void tearDown() {
     }
-    /*
+
     @Test
     void all() {
 
             webTestClient.get()
-            .uri("/employees")
+            .uri("/wine")
             .exchange() //recupera la respuesta
             .expectStatus().isOk()
             .expectHeader().valueEquals("Content-Type", "application/hal+json")
@@ -59,7 +59,7 @@ class WineControllerTest {
 
 
             }
-*/
+
 
     @Test
     void one() {
@@ -114,30 +114,48 @@ class WineControllerTest {
                 .jsonPath("$.year").isEqualTo("2050");
 
     }
-}
-/*
-        this.id = id;
-        this.winery_id = winery_id;
-        this.name = name;
-        this.year = year;
-        this.num_reviews = num_reviews;
-        this.rating = rating;
-        this.region_id = region_id;
-        this.price = price;
-        this.type_id = type_id;
-        this.body = body;
-        this.acidity = acidity;
- */
 
 
-/*
     @Test
-    void createEmployee() {
+    void createWine() {
+        Wine wine = new Wine();
+        wine.setName("Tardillo");
+        wine.setYear("1800");
 
+
+        webTestClient.post()
+                .uri("/wine")
+                .bodyValue(wine)
+                .exchange()//recupera la respuesta
+                .expectStatus().is2xxSuccessful()
+                .expectBody()
+                .jsonPath("$.name").isEqualTo("Tardillo")
+                .jsonPath("$.year").isEqualTo("1800");
 
     }
+
+
+
+    @Test
+    void deleteWine(){
+
+        webTestClient.delete()
+                .uri("/wine/{id}", 7501)
+                .exchange()
+                .expectStatus().is2xxSuccessful();
+    }
+
+    @Test
+    void deleteWineDoesnExists(){
+        webTestClient.delete()
+                .uri("/wine/{id}", 7501)
+                .exchange()
+                .expectStatus().is5xxServerError();
+
+    }
+
 }
 
-*/
+
 
 
