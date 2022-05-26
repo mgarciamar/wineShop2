@@ -33,7 +33,7 @@ class WineryControllerTest {
             .expectStatus().isOk()
             .expectHeader().valueEquals("Content-Type", "application/hal+json")
             .expectBody()
-            .jsonPath("$._embedded.wineryList.size()").isEqualTo(481)
+            .jsonPath("$._embedded.wineryList.size()").isEqualTo(483)
             .jsonPath("$._embedded.wineryList[1].name").isEqualTo("Artadi") //nombre del winery
             .jsonPath("$._embedded.wineryList[1].id").isEqualTo(2); //id
 

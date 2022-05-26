@@ -60,14 +60,14 @@ class WineControllerTest {
                 .expectStatus().isOk()//
                 .expectHeader().valueEquals("Content-Type", "application/hal+json")
                 .expectBody()
-                .jsonPath("$.name").isEqualTo("Vina El Pison") //nombre del primer vino
+                .jsonPath("$.name").isEqualTo("Ribera del Duero") //nombre del primer vino
                 .jsonPath("$.id").isEqualTo(2) //id
-                .jsonPath("$.year").isEqualTo("2018") //año
-                .jsonPath("$.rating").isEqualTo("4.9") //rating
-                .jsonPath("$.num_reviews").isEqualTo(31) //num_reviews
-                .jsonPath("$.price").isEqualTo("313.5") //price
-                .jsonPath("$.body").isEqualTo("4") //body
-                .jsonPath("$.acidity").isEqualTo("2") //acidity
+                .jsonPath("$.year").isEqualTo("1500") //año
+                .jsonPath("$.rating").isEqualTo("5.3") //rating
+                .jsonPath("$.num_reviews").isEqualTo(5) //num_reviews
+                .jsonPath("$.price").isEqualTo("20.0") //price
+                .jsonPath("$.body").isEqualTo("1") //body
+                .jsonPath("$.acidity").isEqualTo("6") //acidity
                 .jsonPath("$.winery_id").isEqualTo(2) //winery_id
                 .jsonPath("$.type_id").isEqualTo(2) //type_id
                 .jsonPath("$.region_id").isEqualTo(2); //region_id
