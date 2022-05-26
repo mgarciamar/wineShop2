@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //lanzar pruebas en un puerto random
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-class EmployeeControllerTest {
+class WineControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
