@@ -19,7 +19,7 @@ public class Type {
         this.name = name;
     }
 
-    public Type() {}
+    Type() {}
 
     public Long getId() {
         return id;

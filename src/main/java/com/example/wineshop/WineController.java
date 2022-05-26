@@ -32,14 +32,11 @@ public class WineController {
 
     @GetMapping("/wine")
     CollectionModel<EntityModel<Wine>> all() {
-
         List<EntityModel<Wine>> wines = repository.findAll().stream()
-                .map(wine -> EntityModel.of(wine,
-                        linkTo(methodOn(WineController.class).one(wine.getId())).withSelfRel(),
-                        linkTo(methodOn(WineController.class).all()).withRel("wine")))
+                .map(assembler::toModel) //
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(wines, linkTo(methodOn(WineController.class).all()).withSelfRel());
+        return CollectionModel.of(wines, linkTo(methodOn(TypeController.class).all()).withSelfRel());
     }
 
     @PostMapping("/wine")
@@ -59,9 +56,7 @@ public class WineController {
         Wine wine = repository.findById(id)
                 .orElseThrow(() -> new WineNotFoundException(id));
 
-        return EntityModel.of(wine, //
-                linkTo(methodOn(WineController.class).one(id)).withSelfRel(),
-                linkTo(methodOn(WineController.class).all()).withRel("wine"));
+        return assembler.toModel(wine);
     }
 
 
