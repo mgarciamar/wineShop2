@@ -1,17 +1,23 @@
 package com.example.wineshop;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.hateoas.server.core.Relation;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 
 @Entity
+@Table(name = "wine")
 public class Wine {
 
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    @NonNull
+    private  Long id;
     private int winery_id;
-
     private String name;
     private String year;
     private int num_reviews;
@@ -24,6 +30,8 @@ public class Wine {
     private int type_id;
     private String body;
     private String acidity;
+
+
 
     Wine(){}
 
@@ -39,6 +47,8 @@ public class Wine {
         this.type_id = type_id;
         this.body = body;
         this.acidity = acidity;
+
+
     }
 
     public Long getId() {
@@ -48,6 +58,7 @@ public class Wine {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public int getWinery_id() {
         return winery_id;

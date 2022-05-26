@@ -1,4 +1,4 @@
-/*package com.example.wineshop;
+package com.example.wineshop;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,56 +26,58 @@ class WineControllerTest {
     @AfterEach
     void tearDown() {
     }
-
+/*
     @Test
-    void all() {
+   void all() {
 
         webTestClient.get()
-                .uri("/employees")
+                .uri("/wine")
                 .exchange() //recupera la respuesta
                 .expectStatus().isOk()
                 .expectHeader().valueEquals("Content-Type", "application/hal+json")
                 .expectBody()
-                .jsonPath("$._embedded.employeeList.size()").isEqualTo(18) //tenemos 18 empleados
-                .jsonPath("$._embedded.employeeList[0].firstName").isEqualTo("Bilbo");
+                .jsonPath("$._embedded.wineList.size()").isEqualTo(500) //tenemos 18 empleados
+                .jsonPath("$._embedded.wineList[0].name").isEqualTo("Tinto");
 
 
-    }
+    }*/
 
     @Test
     void one() {
         webTestClient.get()
-                //.uri("/employees/1")
-                .uri("/employees/{id}", 1)
+                .uri("/wine/{id}", 1)
                 .exchange()//recupera la respuesta
                 .expectStatus().isOk()//
                 .expectHeader().valueEquals("Content-Type", "application/hal+json")
                 .expectBody()
-                .jsonPath("$.firstName").isEqualTo("Bilbo") //nombre del primero
+                .jsonPath("$.name").isEqualTo("Tinto") //nombre del primero
                 .jsonPath("$.id").isEqualTo(1) //id
-                .jsonPath("$.role").isEqualTo("burglar"); //rol
+                .jsonPath("$.year").isEqualTo("2013"); //rol
     }
 
 
+
+
     @Test
-    void employeeDoesnExist() {
+    void wineDoesnExist() {
         webTestClient.get()
-                //.uri("/employees/1")
-                .uri("/employees/{id}", 88)
+                .uri("/wine/{id}", 8000)
                 .exchange()//recupera la respuesta
                 //.expectStatus().is4xxClientError()//404
                 .expectStatus().isNotFound()
                 .expectBody()
                 //.equals("Could not find employee 88")
-                .toString().contains("Could not find employee");
+                .toString().contains("Could not find wine");
     }
 
-    @Test
-    void updateEmployee() {
 
-        Map<String, Object> employee = new HashMap<>();
-        employee.put("firstName", "Jacinto");
-        employee.put("lastName", "Sanchez");
+/*
+    @Test
+    void updateWine() {
+
+        Wine employee=new Wine(50, int winery_id, String name, String year, int num_reviews, float rating, int region_id, double price, int type_id, String body, String acidity);
+        employee.setFirstName("Monica");
+        employee.setLastName("Garcia");
 
         webTestClient.put()
                 .uri("/employees/{id}", 6)
@@ -87,7 +89,8 @@ class WineControllerTest {
                 .jsonPath("$.lastName").isEqualTo("Sanchez");
 
     }
-
+*/
+    /*
     @Test
     void createEmployee() {
 
@@ -105,6 +108,7 @@ class WineControllerTest {
                 .jsonPath("$.lastName").isEqualTo("Garcia");
 
     }
+    */
+
 }
 
-*/
