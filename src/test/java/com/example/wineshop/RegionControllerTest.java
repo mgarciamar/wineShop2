@@ -11,7 +11,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class TypeControllerTest {
+public class RegionControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -24,79 +24,81 @@ public class TypeControllerTest {
     void tearDown() {
     }
 
+
     @Test
     void all() {
         webTestClient.get()
-                .uri("/type")
+                .uri("/region")
                 .exchange() //recupera la respuesta
                 .expectStatus().isOk()
                 .expectHeader().valueEquals("Content-Type", "application/hal+json")
                 .expectBody()
-                .jsonPath("$._embedded.typeList[0].name").isEqualTo("Toro Red") //nombre del primer vino
-                .jsonPath("$._embedded.typeList[0].id").isEqualTo(1); //id
-
+                .jsonPath("$._embedded.regionList[0].id").isEqualTo(1)
+                .jsonPath("$._embedded.regionList[0].name").isEqualTo("Toro") //nombre del primer vino
+                .jsonPath("$._embedded.regionList[0].country").isEqualTo("Espana");
     }
 
-    @Test
-    void typeDoesntExists() {
-        webTestClient.get()
 
-                .uri("/type/{id}", 8000)
-                .exchange()//recupera la respuesta
-                //.expectStatus().is4xxClientError()//404
+    @Test
+    void typeDoesnExists() {
+
+        webTestClient.get()
+                .uri("/region/{id}" , 9000)
+                .exchange()
                 .expectStatus().isNotFound()
                 .expectBody()
-                .toString().contains("Could not find type");
+                .toString().contains("Could not find region");
     }
 
+
     @Test
-    void updateType() {
-        Type type = new Type();
-        type.setName("Alejandro");
+    void updateRegion() {
+        Region region = new Region();
+        region.setName("Vallecas");
+        region.setCountry("Espana");
 
         webTestClient.put()
-                .uri("/type/{id}", 1)
-                .bodyValue(type)
+                .uri("/region/{id}" , 1)
+                .bodyValue(region)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
-                .jsonPath("$.name").isEqualTo("Alejandro");
-
+                .jsonPath("$.name").isEqualTo("Vallecas")
+                .jsonPath("$.country").isEqualTo("Espana");
     }
 
     @Test
-    void createType() {
-        Type type = new Type();
-        type.setName("NuevoTipo");
+    void createRegion(){
+        Region region = new Region();
+        region.setName("Tarraco");
+        region.setCountry("Espana");
 
         webTestClient.post()
-                .uri("/type")
-                .bodyValue(type)
+                .uri("/region")
+                .bodyValue(region)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
-                .jsonPath("$.name").isEqualTo("nuevoTipo");
+                .jsonPath("$.name").isEqualTo("Tarraco")
+                .jsonPath("$.country").isEqualTo("Espana");
     }
 
+
     @Test
-    void deleteType() {
+    void deleteRegion() {
         webTestClient.delete()
-                .uri("/type/{id}", 42)
+                .uri("/region/{id}", 2)
                 .exchange()
                 .expectStatus().is2xxSuccessful();
     }
 
 
     @Test
-    void deleteTypeDoesntExists(){
+    void deleteRegionDoesntExists(){
         webTestClient.delete()
 
-                .uri("/type/{id}", 9000)
+                .uri("/region/{id}", 9000)
                 .exchange()
                 .expectStatus().is5xxServerError();
     }
-
-
-
-
 }
