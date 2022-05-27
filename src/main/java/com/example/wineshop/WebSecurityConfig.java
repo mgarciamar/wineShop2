@@ -1,4 +1,4 @@
-package com.example.wineshop;
+/*package com.example.wineshop;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,3 +41,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new InMemoryUserDetailsManager(user);
 	}
 }
+
+*/
